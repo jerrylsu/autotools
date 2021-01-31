@@ -36,10 +36,3 @@ def plot_2d(predicts, labels):
     plt.xlim(X.min(), X.max())
     plt.ylim((Y.min(), Y.max()))
 
-
-if __name__ == "__main__":
-    visualization_data = torch.load(os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), 'data/visualization/visualization_exp1.bin'))
-    sdae, classifer, labels = visualization_data["epoch19"]["sdae"], visualization_data["epoch19"]["classifier"], visualization_data["epoch19"]["labels"]
-    #plot_3d(sdae, labels)
-    plot_2d(classifer, labels)
-    pass
