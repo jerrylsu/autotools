@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyutils"
-version = "0.1.1"
+version = "0.2.0"
 description = ""
 authors = ["Jerry <sa517301@mail.ustc.edu.cn>"]
 
