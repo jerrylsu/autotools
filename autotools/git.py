@@ -1,4 +1,4 @@
-"""Git related utils.
+"""Git related tools.
 """
 import os
 import subprocess as sp
