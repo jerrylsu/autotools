@@ -52,7 +52,8 @@ class Git(object):
     def push(self, branch: str = "master", force: bool = False):
         """Git push.
         """
-        cmd = f"git push origin {branch}" + "--force" if force else ""
+        force = "--force" if force else ""
+        cmd = f"git push origin {branch}" + force
         status = self._run(cmd)
         return status
 
