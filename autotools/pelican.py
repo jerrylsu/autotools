@@ -2,6 +2,8 @@
 """
 import os
 
+import pelican_jerry as pelican
+
 
 class Pelican(object):
     """The class of pelican.
