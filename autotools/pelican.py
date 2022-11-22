@@ -2,7 +2,7 @@
 """
 import os
 
-import pelican_jerry as pelican
+import pelican
 
 
 class Pelican(object):
