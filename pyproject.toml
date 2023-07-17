@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "autotools"
-version = "0.1.1"
+version = "0.1.2"
 description = "A utils Python package for data scientists."
 authors = ["Jerry Su <sa517301@mail.ustc.edu.cn>"]
 license = "MIT"
@@ -9,7 +9,7 @@ repository = "https://github.com/jerrylsu/autotools"
 keywords = ["AI", "Machine Learning", "tools", "utils"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.5"
 loguru = "^0.6.0"
 nbformat = "^5.7.0"
 psutil = "^5.9.4"
