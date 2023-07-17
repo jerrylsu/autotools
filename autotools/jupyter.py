@@ -72,7 +72,7 @@ class JupyterLab(object):
             fp.writelines(config_ls)
 
         # launch jupyterlab
-        logger.infor(cmd)
+        cmd = f"nohup jupyter lab --ip=0.0.0.0 --no-browser --allow-root --port {port} > ./jupyterlab.log 2>&1 &"
         status = self._run(cmd=cmd)
         if not status:
             logger.info(f"Jupyterlab server launch failed.")
