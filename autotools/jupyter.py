@@ -79,7 +79,7 @@ class JupyterLab(object):
             return status
 
         logger.info(f"Jupyterlab server launch success, port: {port}, "
-                    f"pid: {self.jupyterlab_engine.get_jupyterlab_pid()}, "
+                    f"pid: {self.get_jupyterlab_pid()}, "
                     f"notebook_dir: {notebook_dir}")
         return status
 
