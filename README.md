@@ -2,6 +2,16 @@
 
 This is a Python pacakage that contains automation tools.
 
+## Build
+
+```
+cd autotools
+
+vim pyproject.toml    # update the version
+
+poetry build
+```
+
 ## Installation
 
 You can download a copy of the latest release and install it using pip.
