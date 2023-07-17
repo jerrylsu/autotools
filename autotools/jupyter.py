@@ -46,8 +46,8 @@ class JupyterLab(object):
         jupyter_lab_config_py = os.path.join(os.path.expanduser('~'), ".jupyter/jupyter_lab_config.py")
         cmds = [
             "jupyter lab --generate-config",
+            "jupyter lab password",
             f"chmod 777 {jupyter_server_config_json}",
-            "jupyter lab password"
         ]
         for cmd in cmds:
             status = self._run(cmd=cmd)
@@ -72,11 +72,15 @@ class JupyterLab(object):
             fp.writelines(config_ls)
 
         # launch jupyterlab
-        cmd = "nohup jupyter lab --ip=0.0.0.0 --no-browser --allow-root --port 8888 > ./jupyterlab.log 2>&1 &"
+        logger.infor(cmd)
         status = self._run(cmd=cmd)
         if not status:
+            logger.info(f"Jupyterlab server launch failed.")
             return status
 
+        logger.info(f"Jupyterlab server launch success, port: {port}, "
+                    f"pid: {self.jupyterlab_engine.get_jupyterlab_pid()}, "
+                    f"notebook_dir: {notebook_dir}")
         return status
 
     def kill(self, pid: int) -> bool:
@@ -89,6 +93,7 @@ class JupyterLab(object):
         except Exception as e:
             logger.info(str(e))
             return status
+        logger.info(f"Jupyterlab server kill success, pid: {pid_jupyterlab}")
         return status
 
 
