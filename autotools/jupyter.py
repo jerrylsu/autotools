@@ -63,10 +63,10 @@ class JupyterLab(object):
         config_ls = [
             "c.ServerApp.terminado_settings = {'shell_command': ['/bin/zsh']}\n",
             "c.NotebookApp.ip='*'\n",
-            f"c.NotebookApp.password = {password}\n",
+            f"c.NotebookApp.password = '{password}'\n",
             "c.NotebookApp.open_browser = False\n",
             f"c.NotebookApp.port = {str(port)}\n",
-            f"c.NotebookApp.notebook_dir = {notebook_dir}\n",
+            f"c.NotebookApp.notebook_dir = '{notebook_dir}'\n",
         ]
         with open(jupyter_lab_config_py, 'a+') as fp:
             fp.writelines(config_ls)
