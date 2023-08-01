@@ -61,7 +61,7 @@ class JupyterLab(object):
 
         # Set config
         config_ls = [
-            "c.ServerApp.terminado_settings = {'shell_command': ['/bin/zsh']}\n",
+            "c.ServerApp.terminado_settings = {'shell_command': ['/bin/bash']}\n",
             "c.NotebookApp.ip='*'\n",
             f"c.NotebookApp.password = '{password}'\n",
             "c.NotebookApp.open_browser = False\n",
