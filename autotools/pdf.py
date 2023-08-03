@@ -3,7 +3,7 @@
 import io
 import os
 from loguru import logger
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Union
 from tqdm import tqdm
 from PIL import Image
 from fitz import Document, Page, Matrix
