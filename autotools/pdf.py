@@ -51,7 +51,7 @@ def pdf_to_images(
     page_no: Optional[int] = None,
     scale_factor: int = 1,
     password: Optional[str] = None,
-)-> Optional[List[Tuple[int, Image.Image]]]:
+) -> Optional[List[Tuple[int, Image.Image]]]:
     """Convert PDF file to PIL Image object list.
 
     Args:
@@ -92,7 +92,11 @@ def pdf_to_images(
     return images
 
 
-def convert_pdf_to_images(pdf_file_dir: str, output_dir: str, scale_factor: int = 2) -> bool:
+def convert_pdf_to_images(
+    pdf_file_dir: str,
+    output_dir: str,
+    scale_factor: int = 2
+) -> bool:
     """Convert PDF to PIL Image objects.
 
     Args:
