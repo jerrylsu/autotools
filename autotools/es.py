@@ -50,11 +50,11 @@ class ElasticSearchIndex(object):
         try:
             ret = self.es_client.indices.create(index=index_name, body=source)
             if not ret["acknowledged"]:
-                logger.error(f"ES index create failed: {e}")
+                logger.error(f"ES index create failed: {ret}")
                 status = "ERROR"
             logger.info(f"Create ES index: {index_name}.")
-        except Exception as e:
-            logger.error(f"ES index create failed: {e}")
+        except Exception as err:
+            logger.error(f"ES index create failed: {err}")
             status = "ERROR"
         return status
 
@@ -74,11 +74,11 @@ class ElasticSearchIndex(object):
         try:
             ret = self.es_client.indices.delete(index=index_name)
             if not ret["acknowledged"]:
-                logger.error(f"ES index delete failed: {e}")
+                logger.error(f"ES index delete failed: {ret}")
                 status = "ERROR"
             logger.info(f"Delete ES index: {index_name}.")
-        except Exception as e:
-            logger.error(f"ES index delete failed: {e}")
+        except Exception as err:
+            logger.error(f"ES index delete failed: {err}")
             status = "ERROR"
         return status
 
@@ -91,55 +91,36 @@ class ElasticSearchIndex(object):
         Output:
             status (`str`): The status, success "OK", fail "ERROR".
         """
-        # 1. Create elasticsearch index.
-        if not self.es_client.indices.exists(index=index_name):
-            status = self.create_index(index_name=index_name)
-            if status == "ERROR":
-                return status
-
-        # 2. Add documents to elasticsearch.
-        successes = 0
-        progress = tqdm(unit="docs")
-        for ok, action in streaming_bulk(client=self.es_client, index=index_name, actions=docs_generator):
-            progress.update(1)
-            successes += ok
+        status = "OK"
+        try:
+            successes = 0
+            progress = tqdm(unit="docs")
+            for ok, action in streaming_bulk(client=self.es_client, index=index_name, actions=docs_generator):
+                progress.update(1)
+                successes += ok
+        except Exception as err:
+            logger.error(f"ES add documents failed: {err}")
+            status = "ERROR"
 
         logger.info(f"Add documents to index [{index_name}]: {successes}.")
         return status
 
-    def search(self, index_name: str, doc_vector_name: str, query_vector: List[float]) -> Dict:
-        """Find the nearest documents indices to the query.
+    def search(self, index_name: str, query: Dict) -> Dict:
+        """Search query.
 
         Args:
             index_name (`str`): The index name.
-            doc_vector_name (`str`): The document vector key name.
-            query_vector (`List[float]`): The query vector.
+            query (`Dict`): The query statement.
         Output:
             response (`Dict`): The response of elasticsearch.
         """
-        script_query = {
-            "query": {
-                "script_score": {
-                    "query": {
-                        "match_all": {}
-                    },
-                    "script": {
-                        "source": f"doc[{doc_vector_name}].size() == 0 ? 0 : cosineSimilarity(params.query_vector, {doc_vector_name}) + 1.0",
-                        "params": {
-                            "query_vector": query_vector
-                        }
-                    }
-                }
-            }
-        }
-
         try:
             search_start = time.time()
-            response = self.es_client.search(index=index_name, body=script_query)
+            response = self.es_client.search(index=index_name, body=query)
             search_time = time.time() - search_start
             logger.info(f"Search time: {search_time}")
-        except Exception as e:
-            logger.error(f"Search the nearest documents indices {index_name} error: {e}.")
+        except Exception as err:
+            logger.error(f"Search the nearest documents indices {index_name} error: {err}.")
             return {}
         return response
 

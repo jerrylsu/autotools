@@ -93,7 +93,7 @@ class JupyterLab(object):
         except Exception as e:
             logger.info(str(e))
             return status
-        logger.info(f"Jupyterlab server kill success, pid: {pid_jupyterlab}")
+        logger.info(f"Jupyterlab server kill success, pid: {pid}")
         return status
 
 
