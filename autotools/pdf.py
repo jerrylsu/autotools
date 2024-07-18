@@ -2,6 +2,7 @@
 """
 import io
 import os
+import requests
 from loguru import logger
 from typing import List, Tuple, Optional, Union
 from tqdm import tqdm

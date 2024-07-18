@@ -1,21 +1,22 @@
 [tool.poetry]
 name = "autotools"
-version = "0.3.2"
-description = "A utils Python package for data scientists."
+version = "0.3.3"
+description = "A utils Python package for Automation."
 authors = ["Jerry Su <sa517301@mail.ustc.edu.cn>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/jerrylsu/autotools"
-keywords = ["AI", "Machine Learning", "tools", "utils"]
+keywords = ["AI", "Machine Learning", "Tools", "Utils"]
 
 [tool.poetry.dependencies]
 python = ">=3.7"
 pelican = ">=4.8.0"
 loguru = ">=0.6.0"
-nbformat = ">=5.7.0"
 psutil = ">=5.9.4"
 tqdm = ">=4.61.2"
 elasticsearch = ">=8.8.0"
+bayoo-docx = ">=0.2.17"
+ltp = ">=4.2.14"
 
 [build-system]
 requires = ["poetry-core"]
