@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "autotools"
-version = "0.3.3"
+version = "0.3.4"
 description = "A utils Python package for Automation."
 authors = ["Jerry Su <sa517301@mail.ustc.edu.cn>"]
 license = "MIT"
