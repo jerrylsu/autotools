@@ -57,7 +57,7 @@ class JupyterLab(object):
         # 1.Get jupyter server password.
         with open(jupyter_server_config_json, 'r') as fp:
             jupyter_server_config = json.load(fp)
-            password = jupyter_server_config["ServerApp"]["password"]
+            password = jupyter_server_config["IdentityProvider"]["hashed_password"]
 
         # Set config
         config_ls = [
